@@ -1,0 +1,42 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.webjars:bootstrap:3.3.7'
+	runtime 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.10'
+	implementation 'javax.servlet:jstl:1.2'
+
+
+	implementation('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.6.RELEASE')
+	
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	//testImplementation 'org.springframework.security:spring-security-test'
+	//compileOnly 'org.eclipse.jdt.core.compiler:ecj:4.6.1'
+
+	compile 'com.auth0:mvc-auth-commons:1.+'
+	
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
