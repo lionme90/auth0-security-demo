@@ -14,10 +14,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -48,7 +46,8 @@ public class AuthController {
     public String login(final HttpServletRequest req) {
         logger.info("Performing login");
         String redirectUri = req.getScheme() + "://" + req.getServerName();
-        if ((req.getScheme().equals("http") && req.getServerPort() != 80) || (req.getScheme().equals("https") && req.getServerPort() != 443)) {
+        if ((req.getScheme().equals("http") && req.getServerPort() != 80)
+                || (req.getScheme().equals("https") && req.getServerPort() != 443)) {
             redirectUri += ":" + req.getServerPort();
         }
         redirectUri += "/callback";
@@ -60,15 +59,9 @@ public class AuthController {
     }
 
 
-    @RequestMapping(value = "/callback", method = RequestMethod.GET)
-    public void getCallback(final HttpServletRequest req, final HttpServletResponse res) throws ServletException, IOException {
+    @GetMapping(value = "/callback")
+    public void getCallback(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
         logger.info("Performing GET callback");
-        handle(req, res);
-    }
-
-    @RequestMapping(value = "/callback", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public void postCallback(final HttpServletRequest req, final HttpServletResponse res) throws ServletException, IOException {
-        logger.info("Performing POST callback");
         handle(req, res);
     }
 

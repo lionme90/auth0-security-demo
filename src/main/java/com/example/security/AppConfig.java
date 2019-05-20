@@ -14,9 +14,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import java.io.UnsupportedEncodingException;
 
-@SuppressWarnings("unused")
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -55,7 +53,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AuthenticationController authenticationController() throws UnsupportedEncodingException {
+    public AuthenticationController authenticationController() {
         return AuthenticationController.newBuilder(domain, clientId, clientSecret)
                 .build();
     }
