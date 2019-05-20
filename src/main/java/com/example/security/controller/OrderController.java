@@ -1,6 +1,7 @@
 package com.example.security.controller;
 
 
+import com.example.security.TokenAuthentication;
 import com.example.security.dto.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +26,13 @@ public class OrderController {
     }
 
     @GetMapping({"/orders"})
-    public String orders(final Map<String, Object> model) {
+    public String orders(final Map<String, Object> model, TokenAuthentication principal) {
         logger.info("Performing /orders. List authorized content");
-
+        if (principal == null) {
+            return "redirect:/login";
+        }
         model.put("orders", getOrderList());
-
+        model.put("jwt", principal.getCredentials());
         return "orders";
     }
 
