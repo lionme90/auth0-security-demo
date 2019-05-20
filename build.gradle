@@ -28,13 +28,8 @@ dependencies {
 	implementation 'javax.servlet:jstl:1.2'
 
 
-	implementation('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.6.RELEASE')
-	
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
-	//testImplementation 'org.springframework.security:spring-security-test'
-	//compileOnly 'org.eclipse.jdt.core.compiler:ecj:4.6.1'
-
-	compile 'com.auth0:mvc-auth-commons:1.+'
+	//implementation('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.6.RELEASE')
+	//implementation 'com.auth0:mvc-auth-commons:1.+'
 	
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

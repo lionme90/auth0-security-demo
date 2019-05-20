@@ -1,15 +1,12 @@
 package com.example.security.controller;
 
-import com.example.security.TokenAuthentication;
+
 import com.example.security.dto.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -22,14 +19,17 @@ public class OrderController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
+    @GetMapping({"/"})
+    public String home() {
+        return "home";
+    }
+
     @GetMapping({"/orders"})
-    public String orders(final Map<String, Object> model, final TokenAuthentication principal) {
-        logger.info("Performing /orders. List authorized content logout");
-        if (principal == null) {
-            return "redirect:/logout";
-        }
+    public String orders(final Map<String, Object> model) {
+        logger.info("Performing /orders. List authorized content");
+
         model.put("orders", getOrderList());
-        model.put("jwt", principal.getCredentials());
+
         return "orders";
     }
 
